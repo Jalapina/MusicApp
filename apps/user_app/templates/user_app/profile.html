@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'user_app/main.css' %}" media="screen" title="no title" charset="UTF-8" >
+    <title>{{request.session.user_name}}</title>
+</head>
+
+<body>
+    <h1>{{request.session.user_name}}</h1>
+    <p><a href="{% url 'main:home' %}">Dashboard</a></p>
+    <p><a href="{% url 'user:logout' %}">Logout</a></p> 
+    <h2><a href="{% url 'main:profile_edit' %}" >Edit profile</a></h2>
+</body>
+
+</html>

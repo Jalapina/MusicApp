@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'playlist_app/main.css' %}" media="screen" title="no title" charset="UTF-8" >
+    <title>{{albums.title}}</title>
+</head>
+<body>
+     <h3><a href="{% url 'main:home' %}">Dashboard</a>&nbsp&nbsp&nbsp<a href="{% url 'user:logout' %}">Logout</a></h3>
+    <h1>{{albums.title}} by <a href="{% url 'music:extra_add' artist_id=albums.artist.id %}">{{albums.artist.name}}</a></h1>
+    
+    <form action="" method="POST">
+    {% csrf_token %}
+    <input type="text" name="html_song">
+    <input type="submit" value="Add song">
+    </form>
+    {% for m in messages %}
+    <p>{{m}}</p>
+    {% endfor %}
+
+     {% for song in songs %}
+        <p>{{song.title}}</p>
+    {% endfor %}
+</body>
+</html>

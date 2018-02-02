@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'playlist_app/main.css' %}" media="screen" title="no title" charset="UTF-8" >
+    <title>Home</title>
+</head>
+<body>
+    {% if request.session.user_id %}
+    <a href="{% url 'user:logout' %}">Logout</a>&nbsp&nbsp
+    <a href="{% url 'main:profile' %}" >View Profile</a>&nbsp&nbsp
+    <a href="{% url 'main:playlist' %}">Add Playlist</a>&nbsp&nbsp
+    {% else %}
+    <a href="{% url 'user:home' %}">Login/Register</a>  
+    {% endif %}
+    <a href="{% url 'music:home' %}">Music</a>&nbsp&nbsp&nbsp
+    <a href="{% url 'user:users' %}">Users</a>
+
+    <h1>Hello <a href="{% url 'main:profile' %}">{{request.session.user_name}}</a>!</h1>
+    
+   
+    
+    <h2>Top 5 song!<h2><hr>
+    <h2>Top 5 Artist<h2><hr>
+    <h2>Top 5 Playlist<h2>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'playlist_app/main.css' %}" media="screen" title="no title" charset="UTF-8" >
+    <title>Users</title>
+</head>
+<body>
+    
+    <a href="{% url 'main:home' %}">Dashboard</a>&nbsp&nbsp&nbsp&nbsp
+    <a href="{% url 'user:logout' %}">Logout</a>
+    <h1>{{request.session.user_name}}</h1>
+
+    <hr>
+
+    <h2>Following</h2>
+    {% for follower in follow %}
+        <p>{{follower.followee.first_name}}
+        {{follower.followee.last_name}}&nbsp&nbsp&nbsp<a href="{% url 'user:unfollow' unfollow_id=follower.followee.id %}">Unfollow</a></p>
+    {% endfor %}
+    <hr>
+
+    {% for user in profiles %}
+        <p>{{user.first_name}}&nbsp{{user.last_name}}</p>&nbsp&nbsp&nbsp&nbsp<a href="{% url 'user:followee' followee_id=user.id %}">Follow</a>
+    {% endfor %}
+
+</body>
+</html>

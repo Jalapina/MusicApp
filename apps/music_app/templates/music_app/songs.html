@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'playlist_app/main.css' %}" media="screen" title="no title" charset="UTF-8" >
+    <title>Document</title>
+</head>
+<body>
+    <h3><a href="{% url 'music:home' %}">Go Back</a><a href="{% url 'main:home' %}">Dashboard</a></h3>
+    <hr>
+    <h1>Add a song</h1>
+
+    <form action="{% url 'music:song' album_id=album.id %}"  method="POST"> <!---adding new songs-->
+    {% csrf_token %}
+    Song:<input type="text" name="html_song">
+    Genre:<input type="text" name="html_genre">
+    <input type="submit" value="Add">
+    </form>
+
+    {% for message in messages %}
+        {{message}}
+    {% endfor %}
+</body>
+</html>

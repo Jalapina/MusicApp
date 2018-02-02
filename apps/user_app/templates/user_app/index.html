@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'user_app/main.css' %}" media="screen" title="no title" charset="UTF-8" >
+    <title>Login/Register</title>
+</head>
+<body>
+    <h1>Login/Register</h1>
+    <h3><a href="{% url 'main:home' %}">Dashboard</a></h3>
+     <form action="{% url 'user:authentication' %}" method="POST">
+            {% csrf_token %}
+            Email:<input type="email" name="html_email">
+            Password:<input type="password" name="html_password"> 
+        <input type="submit" value="Login">
+        </form>
+
+        <hr>
+        {% for message in messages %}
+            <p>{{message}}</p>
+        {% endfor %}
+        <hr>
+
+        <div id="register">
+        <form action="{% url 'user:register' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="html_name">First Name<br>
+            <input type="text" name="html_last_name">last Name<br>
+            <input type="email" name="html_email"> Email<br>
+            <input type="password" name="html_password"> Password<br>
+            <input type="password" name="html_confirm"> Confirm Password<br>
+            <input type="submit" value="Register">
+        </form> 
+        </div>  
+</body>
+</html>

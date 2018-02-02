@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'playlist_app/main.css' %}" media="screen" title="no title" charset="UTF-8" >
+    <title>{{artist_id.name}}</title>
+</head>
+<body>
+    <h3><a href="{% url 'main:home' %}">Dashboard</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <a href="{% url 'music:home' %}">Go Back</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <a href="{% url 'user:logout' %}">Logout</a></h3>
+    <hr>
+    <h1>{{artist_id.name}} 
+    
+    <a id="fan" href="{% url 'music:fans' artist_id=artist_id.id %}">Follow</a>
+    
+    </h1>
+
+    <form action="{% url 'music:extra_add' artist_id=artist_id.id %}" method="POST">
+    {% csrf_token %}
+    Album:<input type="text" name="html_album">
+    Year:<input type="text" name="html_year">
+    <input type="submit" value="Add">
+    </form><br>
+    {% for message in messages %}
+        <p>{{message}}</p>
+    {% endfor %}
+
+    
+    {% for album in album_id %}
+    <p><a href="{% url 'music:albums' album_id=album.id %}" >{{album.title}}</a></p>
+    {% for song in album.songs.all %}
+    <p>{{song.title}}</p>
+    {% endfor %}
+    {% endfor %}
+</body>
+</html>

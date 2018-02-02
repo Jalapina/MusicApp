@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'music_app/music.css' %}" media="screen" title="no title" charset="UTF-8" >
+    <title>Music</title>
+</head>
+<body>
+    
+    <h3><a href="{% url 'main:home' %}">Dashboard</a>&nbsp&nbsp&nbsp<a href="{% url 'user:logout' %}">Logout</a></h3>
+    <h1>Music</h1>
+    <hr>
+    <form action="{% url 'music:add' %}" method="POST">
+
+    {% csrf_token %}
+
+    Artist:&nbsp&nbsp<input type="text" name="html_artist"><br>
+
+    Album:<input type="text" name="html_album"><br>
+    
+    Year:&nbsp&nbsp&nbsp<input type="datetime" name="album_year">
+    
+    <input type="submit" value="Add" ><!--adding new artist and albums-->
+
+    </form>
+
+    {% for m in messages %}
+        <p>{{m}}</p>
+    {% endfor %}
+    
+    {% for artist in artists %}
+    <div id="art">
+    <h3><a href="{% url 'music:extra_add' artist_id=artist.id %}">{{artist.name}}</a></h3>
+    
+    <!--{% for albums in artist.albums.all %}
+
+        <p>{{albums.title}}</p>
+    
+    {% endfor %}-->
+    </div>
+    {% endfor %}
+    
+    
+</body>
+</html>

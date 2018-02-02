@@ -1,0 +1,5 @@
+bcrypt
+djangorestframework
+djangorestframework-jwt
+django-cors-middleware
+django==1.11.4
